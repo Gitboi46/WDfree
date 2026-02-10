@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Stamp & Ink</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #ffffff;
+  color: #000;
+}
+
+/* PAGE CONTAINER */
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 90px 60px 140px;
+}
+
+/* HEADING */
+.title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 120px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 120px;
+  justify-items: center;
+}
+
+/* ITEM */
+.item {
+  text-align: center;
+}
+
+/* IMAGE PLACEHOLDER */
+.card {
+  width: 260px;
+  height: 260px;
+  background: #dfdfdf;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}
+
+/* LABEL */
+.label {
+  font-size: 14px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 80px;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="title">Stamp &amp; Ink</div>
+
+  <div class="grid">
+
+    <div class="item">
+      <div class="card"></div>
+      <div class="label">Pre Inked Stamp</div>
+    </div>
+
+    <div class="item">
+      <div class="card"></div>
+      <div class="label">Self Inked Stamp</div>
+    </div>
+
+    <div class="item">
+      <div class="card"></div>
+      <div class="label">Rubber Stamps</div>
+    </div>
+
+    <div class="item">
+      <div class="card"></div>
+      <div class="label">Circle Rubber Stamp</div>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

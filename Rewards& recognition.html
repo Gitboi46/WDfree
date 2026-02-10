@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Trophies</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #ffffff;
+  color: #000;
+}
+
+/* PAGE CONTAINER */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 40px;
+}
+
+/* TITLE */
+.title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 90px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 90px;
+}
+
+/* ITEM */
+.item {
+  text-align: center;
+}
+
+/* IMAGE PLACEHOLDER */
+.card {
+  width: 100%;
+  height: 260px;
+  background: #dfdfdf;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+/* LABEL */
+.label {
+  font-size: 16px;
+  line-height: 1.4;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="title">Trophies</div>
+
+  <div class="grid">
+
+    <div class="item">
+      <div class="card"></div>
+      <div class="label">
+        Wooden Trophies &<br>
+        Mementos
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="card"></div>
+      <div class="label">
+        Crystal & Acrylic<br>
+        Awards
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="card"></div>
+      <div class="label">
+        Certificates
+      </div>
+    </div>
+
+    <div class="item">
+      <div class="card"></div>
+      <div class="label">
+        Medals
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

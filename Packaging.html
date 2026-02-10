@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Packaging</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #ffffff;
+  color: #000;
+}
+
+/* PAGE WRAPPER */
+.container {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 70px 60px 120px;
+}
+
+/* TITLE */
+.title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 80px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 120px;
+  row-gap: 90px;
+  justify-items: center;
+}
+
+/* ITEM */
+.item {
+  text-align: center;
+}
+
+/* PLACEHOLDER BOX */
+.card {
+  width: 220px;
+  height: 220px;
+  background: #dfdfdf;
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+
+/* LABEL */
+.label {
+  font-size: 14px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 60px;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="title">Packaging</div>
+
+  <div class="grid">
+
+    <div class="item"><div class="card"></div><div class="label">Packaging Labels</div></div>
+    <div class="item"><div class="card"></div><div class="label">Stickers</div></div>
+    <div class="item"><div class="card"></div><div class="label">Packaging Boxes</div></div>
+    <div class="item"><div class="card"></div><div class="label">Courier Bags</div></div>
+
+    <div class="item"><div class="card"></div><div class="label">Packing Tapes</div></div>
+    <div class="item"><div class="card"></div><div class="label">Packaging Pouches</div></div>
+    <div class="item"><div class="card"></div><div class="label">Paper Bags</div></div>
+    <div class="item"><div class="card"></div><div class="label">Food Boxes</div></div>
+
+    <div class="item"><div class="card"></div><div class="label">Hangtags</div></div>
+    <div class="item"><div class="card"></div><div class="label">Shipping Envelopes</div></div>
+    <div class="item"><div class="card"></div><div class="label">Tent Cards</div></div>
+    <div class="item"><div class="card"></div><div class="label">Placemats</div></div>
+
+  </div>
+
+</div>
+
+</body>
+</html>

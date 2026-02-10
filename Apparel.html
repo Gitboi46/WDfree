@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Apparel</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #ffffff;
+  color: #000;
+}
+
+/* PAGE WRAPPER */
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+/* SECTION TITLE */
+.section-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 40px 0 35px;
+}
+
+/* GRID LAYOUT */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 60px 40px;
+  margin-bottom: 80px;
+}
+
+/* ITEM */
+.item {
+  text-align: center;
+}
+
+/* IMAGE PLACEHOLDER */
+.image-box {
+  width: 100%;
+  height: 200px;
+  background: #e0e0e0;
+  border-radius: 6px;
+  margin-bottom: 14px;
+}
+
+/* PRODUCT TEXT */
+.item p {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <!-- CUSTOM SHIRTS -->
+  <div class="section-title">Custom Shirts</div>
+
+  <div class="grid">
+    <div class="item">
+      <div class="image-box"></div>
+      <p>Custom Round Neck<br>T-Shirts</p>
+    </div>
+
+    <div class="item">
+      <div class="image-box"></div>
+      <p>Custom Polo T-Shirts</p>
+    </div>
+
+    <div class="item">
+      <div class="image-box"></div>
+      <p>Sweatshirts</p>
+    </div>
+
+    <div class="item">
+      <div class="image-box"></div>
+      <p>Hoodies</p>
+    </div>
+  </div>
+
+  <!-- CAPS -->
+  <div class="section-title">Caps</div>
+
+  <div class="grid">
+    <div class="item">
+      <div class="image-box"></div>
+      <p>Printed Plain Caps</p>
+    </div>
+
+    <div class="item">
+      <div class="image-box"></div>
+      <p>Embroidery Line Stitching<br>Caps</p>
+    </div>
+  </div>
+
+  <!-- BACKPACK & TOTE -->
+  <div class="section-title">Backpack &amp; Tote</div>
+
+  <div class="grid">
+    <div class="item">
+      <div class="image-box"></div>
+      <p>Backpack</p>
+    </div>
+
+    <div class="item">
+      <div class="image-box"></div>
+      <p>Tote Bag</p>
+    </div>
+
+    <div class="item">
+      <div class="image-box"></div>
+      <p>Laptop Sleeves</p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

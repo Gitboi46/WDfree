@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Print Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #fff;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  align-items: center;
+  padding: 15px 30px;
+  gap: 20px;
+}
+
+.logo {
+  background: #ddd;
+  padding: 10px 20px;
+}
+
+.search-box {
+  flex: 1;
+  display: flex;
+  background: #e0e0e0;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.header-links a {
+  margin-left: 15px;
+  text-decoration: none;
+  color: #000;
+}
+
+/* NAV */
+.nav {
+  display: flex;
+  gap: 10px;
+  padding: 10px 30px;
+  font-size: 14px;
+  flex-wrap: wrap;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #333;
+  padding: 8px 14px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.nav a:hover {
+  background: #000;
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* SLIDER */
+.slider {
+  background: #e5e5e5;
+  height: 260px;
+  position: relative;
+}
+
+.slide {
+  display: none;
+  height: 260px;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.slide.active {
+  display: flex;
+}
+
+.dots {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  background: #aaa;
+  display: inline-block;
+  border-radius: 50%;
+  margin: 0 5px;
+}
+
+.dot.active {
+  background: #000;
+}
+
+/* SECTIONS */
+.section {
+  padding: 40px;
+  text-align: center;
+}
+
+.section h2 {
+  margin-bottom: 25px;
+}
+
+.grid {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 160px;
+  height: 120px;
+  background: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* REVIEWS */
+.reviews {
+  text-align: center;
+  padding: 50px;
+}
+
+.stars {
+  margin: 15px 0;
+  font-size: 22px;
+}
+
+.review-text {
+  max-width: 600px;
+  margin: auto;
+}
+
+.reviewer {
+  display: block;
+  margin-top: 10px;
+  color: #007bff;
+}
+
+/* AD */
+.ad-banner {
+  background: #e0e0e0;
+  height: 120px;
+  margin: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* FOOTER */
+.footer {
+  display: flex;
+  justify-content: space-around;
+  padding: 30px;
+  flex-wrap: wrap;
+}
+
+.map {
+  width: 300px;
+  height: 150px;
+  background-image: url("https://maps.googleapis.com/maps/api/staticmap?center=12.9208213,77.620164&zoom=15&size=600x300&markers=color:red%7C12.9208213,77.620164");
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 10px;
+  color: #000;
+  font-weight: bold;
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.map:hover {
+  background: #ccc;
+}
+
+.footer-links a {
+  display: inline;
+  margin-right: 5px;
+  text-decoration: none;
+  color: #000;
+}
+
+/* SPACE FOR SOCIAL MEDIA ICONS */
+.socials {
+  margin-top: 10px;
+}
+
+.socials a {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+  background: #ddd;
+  border-radius: 50%;
+  text-decoration: none;
+}
+
+.copy {
+  text-align: center;
+  padding: 15px;
+  font-size: 13px;
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+  <div class="logo">Logo</div>
+
+  <div class="search-box">
+    <input type="text" placeholder="Search">
+    🔍
+  </div>
+
+  <div class="header-links">
+    <a href="file:///C:/Users/HP/OneDrive/Desktop/Web%20Development/Support.html">Help Center</a>
+    <a href="#">Sign in</a>
+  </div>
+</header>
+
+<nav class="nav">
+  <a href="file:///C:/Users/HP/OneDrive/Desktop/Web%20Development/Calendars&Diaries.html">Calendars & Diaries</a>
+  <a href="file:///C:/Users/HP/OneDrive/Desktop/Web%20Development/Apparel.html">Apparel</a>
+  <a href="file:///C:/Users/HP/OneDrive/Desktop/Web%20Development/Photo%20Gifts.html">Photo Gift</a>
+  <a href="file:///C:/Users/HP/OneDrive/Desktop/Web%20Development/Rewards&%20recognition.html">Rewards & Recognition</a>
+  <a href="file:///C:/Users/HP/OneDrive/Desktop/Web%20Development/Stationary.html">Business Stationery</a>
+  <a href="file:///C:/Users/HP/OneDrive/Desktop/Web%20Development/Marketing%20&%20Promo.html">Marketing & Promo</a>
+  <a href="file:///C:/Users/HP/OneDrive/Desktop/Web%20Development/Packaging.html">Packaging</a>
+  <a href="file:///C:/Users/HP/OneDrive/Desktop/Web%20Development/Stamp%20&%20Ink.html">Stamps & Ink</a>
+  <a href="file:///C:/Users/HP/OneDrive/Desktop/Web%20Development/Drinkware.html">Drinkware</a>
+</nav>
+
+<section class="slider">
+  <div class="slide active">Image Sliding</div>
+  <div class="slide">Banner Image 2</div>
+  <div class="slide">Banner Image 3</div>
+
+  <div class="dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Popular Categories</h2>
+  <div class="grid">
+    <div class="card">Startup Branding</div>
+    <div class="card">Event & Promotions</div>
+    <div class="card">Cafe & Restaurant</div>
+    <div class="card">Photo Gifts</div>
+    <div class="card">Rewards & Recognition</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Best Sellers</h2>
+  <div class="grid">
+    <div class="card">Business Cards</div>
+    <div class="card">Photo Frames</div>
+    <div class="card">Apparel</div>
+    <div class="card">Stickers</div>
+    <div class="card">Cards</div>
+    <div class="card">Drinkware</div>
+  </div>
+</section>
+
+<section class="reviews">
+  <h2> What Our Customers Say</h2>
+  <div class="stars">⭐⭐⭐⭐☆</div>
+  <p class="review-text">
+    Best Quality Printing, Whole workflow impressed and design work too good,
+    more than expected output I received. Thank you.
+  </p>
+  <span class="reviewer">– Krishna K</span>
+</section>
+
+<div class="ad-banner">Ad Banner Image</div>
+
+<footer class="footer">
+  <a href="https://www.google.com/maps/place/Nahdi+Mandi+Restaurant+Bangalore/@12.9206363,77.6160441,956m/data=!3m1!1e3!4m6!3m5!1s0x3bae15547bd9ab15:0x902be23582683785!8m2!3d12.9208213!4d77.620164!16s%2Fg%2F11vcmd7pr0?entry=ttu"
+     target="_blank"
+     style="text-decoration: none; color: inherit;">
+    <div class="map">Your Store Name<br>Your Full Address<br>Bengaluru, Karnataka</div>
+  </a>
+
+  <div class="footer-links">
+    <a href="file:///C:/Users/HP/OneDrive/Desktop/Web%20Development/About%20Us.html">About Us |</a>
+    <a href="file:///C:/Users/HP/OneDrive/Desktop/Web%20Development/Support.html">Support</a>
+
+    <div class="socials">
+      <a href="https://www.facebook.com/" target="_blank">
+        <img src="C:\Users\HP\OneDrive\Desktop\Web Development\Assets\icons8-facebook-logo-64 blk.png" width="30" height="30">
+      </a>
+      <a href="https://www.instagram.com/" target="_blank">
+        <img src="C:\Users\HP\OneDrive\Desktop\Web Development\Assets\icons8-instagram-windows-11-filled blk\icons8-instagram-64.png" width="30" height="30">
+      </a>
+      <a href="https://twitter.com/" target="_blank">
+        <img src="C:\Users\HP\OneDrive\Desktop\Web Development\Assets\icons8-twitter-logo-64 blk.png" width="30" height="30">
+      </a>
+    </div>
+  </div>
+</footer>
+
+<div class="copy">All copy rights Reserved</div>
+
+<script>
+let index = 0;
+const slides = document.querySelectorAll(".slide");
+const dots = document.querySelectorAll(".dot");
+
+function showSlide(i) {
+  slides.forEach(s => s.classList.remove("active"));
+  dots.forEach(d => d.classList.remove("active"));
+  slides[i].classList.add("active");
+  dots[i].classList.add("active");
+}
+
+setInterval(() => {
+  index = (index + 1) % slides.length;
+  showSlide(index);
+}, 3000);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Event & Promotion</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #ffffff;
+  color: #000;
+}
+
+/* PAGE WRAPPER */
+.wrapper {
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 70px 90px 140px;
+}
+
+/* SECTION */
+.section {
+  margin-bottom: 120px;
+}
+
+/* SECTION TITLE */
+.section-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 70px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  justify-items: center;
+  column-gap: 120px;
+  row-gap: 70px;
+}
+
+/* ITEM */
+.item {
+  text-align: center;
+}
+
+/* PLACEHOLDER BOX */
+.box {
+  width: 160px;
+  height: 160px;
+  background: #e0e0e0;
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+
+/* LABEL */
+.label {
+  font-size: 13px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1400px) {
+  .grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <!-- Event & Promotion -->
+  <div class="section">
+    <div class="section-title">Event &amp; Promotion</div>
+
+    <div class="grid">
+      <div class="item"><div class="box"></div><div class="label">Business Cards</div></div>
+      <div class="item"><div class="box"></div><div class="label">Event T-Shirts</div></div>
+      <div class="item"><div class="box"></div><div class="label">Event ID Cards</div></div>
+      <div class="item"><div class="box"></div><div class="label">Caps</div></div>
+      <div class="item"><div class="box"></div><div class="label">Lanyards</div></div>
+      <div class="item"><div class="box"></div><div class="label">Paper Bags</div></div>
+
+      <div class="item"><div class="box"></div><div class="label">Posters</div></div>
+      <div class="item"><div class="box"></div><div class="label">Booklets</div></div>
+      <div class="item"><div class="box"></div><div class="label">Sunboard Posters</div></div>
+      <div class="item"><div class="box"></div><div class="label">Standees</div></div>
+      <div class="item"><div class="box"></div><div class="label">Brouchers</div></div>
+      <div class="item"><div class="box"></div><div class="label">Banners</div></div>
+
+      <div class="item"><div class="box"></div><div class="label">Desk stands</div></div>
+      <div class="item"><div class="box"></div><div class="label">Danglers</div></div>
+      <div class="item"><div class="box"></div><div class="label">QR Code Stand</div></div>
+    </div>
+  </div>
+
+  <!-- Networking -->
+  <div class="section">
+    <div class="section-title">Networking</div>
+
+    <div class="grid" style="grid-template-columns: repeat(5, 1fr);">
+      <div class="item"><div class="box"></div><div class="label">Tote Bags</div></div>
+      <div class="item"><div class="box"></div><div class="label">Drinkware</div></div>
+      <div class="item"><div class="box"></div><div class="label">Thank you Cards</div></div>
+      <div class="item"><div class="box"></div><div class="label">Button Badges</div></div>
+      <div class="item"><div class="box"></div><div class="label">Flyers</div></div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

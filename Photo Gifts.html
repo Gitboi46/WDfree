@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Photo Gifts</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #ffffff;
+  color: #000;
+}
+
+/* PAGE WRAPPER */
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+/* SECTION TITLE */
+.section-title {
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 40px 0 40px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 60px 40px;
+  margin-bottom: 80px;
+}
+
+/* ITEM */
+.item {
+  text-align: center;
+}
+
+/* IMAGE PLACEHOLDER */
+.image-box {
+  width: 100%;
+  height: 200px;
+  background: #e0e0e0;
+  border-radius: 6px;
+  margin-bottom: 14px;
+}
+
+/* TEXT */
+.item p {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+  <!-- PHOTO GIFTS -->
+  <div class="section-title">Photo Gifts</div>
+
+  <div class="grid">
+    <div class="item">
+      <div class="image-box"></div>
+      <p>Photo Frames</p>
+    </div>
+
+    <div class="item">
+      <div class="image-box"></div>
+      <p>Photo With Wooden Stand</p>
+    </div>
+
+    <div class="item">
+      <div class="image-box"></div>
+      <p>Photo Pendant Stand</p>
+    </div>
+
+    <div class="item">
+      <div class="image-box"></div>
+      <p>Fridge Magnets</p>
+    </div>
+
+    <div class="item">
+      <div class="image-box"></div>
+      <p>Photo Book</p>
+    </div>
+
+    <div class="item">
+      <div class="image-box"></div>
+      <p>Sipper Bottle Photo Print</p>
+    </div>
+
+    <div class="item">
+      <div class="image-box"></div>
+      <p>Photo Mugs</p>
+    </div>
+
+    <div class="item">
+      <div class="image-box"></div>
+      <p>Photo Keychain</p>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

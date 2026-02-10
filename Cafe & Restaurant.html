@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cafe & Restaurant</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #ffffff;
+  color: #000;
+}
+
+/* PAGE WRAPPER */
+.wrapper {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 60px 80px 120px;
+}
+
+/* SECTION */
+.section {
+  margin-bottom: 120px;
+}
+
+/* SECTION TITLE */
+.section-title {
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 70px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  justify-items: center;
+  gap: 80px 120px;
+}
+
+/* GRID VARIANTS */
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+.grid-6 { grid-template-columns: repeat(6, 1fr); }
+.grid-5 { grid-template-columns: repeat(5, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+
+/* ITEM */
+.item {
+  text-align: center;
+}
+
+/* IMAGE PLACEHOLDER */
+.box {
+  width: 150px;
+  height: 150px;
+  background: #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 14px;
+}
+
+/* LABEL */
+.label {
+  font-size: 13px;
+}
+
+/* FOOTER */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 80px;
+  font-size: 12px;
+}
+
+.social span {
+  margin-right: 10px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1200px) {
+  .grid-6 { grid-template-columns: repeat(3, 1fr); }
+  .grid-5 { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .grid-4,
+  .grid-6,
+  .grid-5,
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .grid-4,
+  .grid-6,
+  .grid-5,
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrapper">
+
+  <!-- Cafe & Restaurant -->
+  <div class="section">
+    <div class="section-title">Cafe &amp; Restaurant</div>
+    <div class="grid grid-4">
+      <div class="item"><div class="box"></div><div class="label">Menu Cards</div></div>
+      <div class="item"><div class="box"></div><div class="label">Business Cards</div></div>
+      <div class="item"><div class="box"></div><div class="label">Rubber Stamps</div></div>
+      <div class="item"><div class="box"></div><div class="label">QR Code Stand</div></div>
+    </div>
+  </div>
+
+  <!-- Delivery Packaging -->
+  <div class="section">
+    <div class="section-title">Delivery Packaging</div>
+    <div class="grid grid-6">
+      <div class="item"><div class="box"></div><div class="label">Packaging Labels</div></div>
+      <div class="item"><div class="box"></div><div class="label">Food &amp; Cake Boxes</div></div>
+      <div class="item"><div class="box"></div><div class="label">Packing Tape</div></div>
+      <div class="item"><div class="box"></div><div class="label">Takeout paper Bags</div></div>
+      <div class="item"><div class="box"></div><div class="label">Paper Pouches</div></div>
+      <div class="item"><div class="box"></div><div class="label">Cotton Carry Bags</div></div>
+    </div>
+  </div>
+
+  <!-- Displays -->
+  <div class="section">
+    <div class="section-title">Displays</div>
+    <div class="grid grid-6">
+      <div class="item"><div class="box"></div><div class="label">Posters</div></div>
+      <div class="item"><div class="box"></div><div class="label">Tent Cards</div></div>
+      <div class="item"><div class="box"></div><div class="label">Standees</div></div>
+      <div class="item"><div class="box"></div><div class="label">Banners</div></div>
+      <div class="item"><div class="box"></div><div class="label">Name Plates</div></div>
+      <div class="item"><div class="box"></div><div class="label">Photo Frames</div></div>
+    </div>
+  </div>
+
+  <!-- Staff Essentials -->
+  <div class="section">
+    <div class="section-title">Staff Essentials</div>
+    <div class="grid grid-3">
+      <div class="item"><div class="box"></div><div class="label">Round Neck T Shirt</div></div>
+      <div class="item"><div class="box"></div><div class="label">Caps</div></div>
+      <div class="item"><div class="box"></div><div class="label">Button Badges</div></div>
+    </div>
+  </div>
+
+  <!-- Branding -->
+  <div class="section">
+    <div class="section-title">Branding</div>
+    <div class="grid grid-5">
+      <div class="item"><div class="box"></div><div class="label">Name Plates</div></div>
+      <div class="item"><div class="box"></div><div class="label">Window Decals</div></div>
+      <div class="item"><div class="box"></div><div class="label">Flyers</div></div>
+      <div class="item"><div class="box"></div><div class="label">Brouchers</div></div>
+      <div class="item"><div class="box"></div><div class="label">Door Hangers</div></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="social">
+      <strong>Follow us</strong>
+      <span>ⓕ</span>
+      <span>ⓘ</span>
+      <span>ⓧ</span>
+    </div>
+    <div>Help Center ⓘ</div>
+  </div>
+
+</div>
+
+</body>
+</html>

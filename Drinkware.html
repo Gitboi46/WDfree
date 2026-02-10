@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Drinkware</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  background: #ffffff;
+  color: #000;
+}
+
+/* MAIN WRAPPER */
+.wrapper {
+  max-width: 1800px;
+  margin: 0 auto;
+  padding: 80px 100px 140px;
+}
+
+/* TITLE */
+.title {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 160px;
+}
+
+/* GRID */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+  column-gap: 160px;
+}
+
+/* ITEM */
+.item {
+  text-align: center;
+}
+
+/* IMAGE PLACEHOLDER */
+.box {
+  width: 320px;
+  height: 320px;
+  background: #e0e0e0;
+  border-radius: 14px;
+  margin-bottom: 26px;
+}
+
+/* LABEL */
+.label {
+  font-size: 18px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1400px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 120px;
+  }
+}
+
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+
+<body>
+
+  <div class="wrapper">
+
+    <div class="title">Drinkware</div>
+
+    <div class="grid">
+
+      <div class="item">
+        <div class="box"></div>
+        <div class="label">Personalized Water Bottle</div>
+      </div>
+
+      <div class="item">
+        <div class="box"></div>
+        <div class="label">Travel Tumbler</div>
+      </div>
+
+      <div class="item">
+        <div class="box"></div>
+        <div class="label">Steel Bottle Print</div>
+      </div>
+
+      <div class="item">
+        <div class="box"></div>
+        <div class="label">Frosty Bottle</div>
+      </div>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
