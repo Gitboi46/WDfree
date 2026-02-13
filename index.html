@@ -71,6 +71,7 @@ canvas { display: block; }
 </style>
 </head>
 <body>
+
 <div id="transitionOverlay"></div>
 <button id="prevBtn" class="nav-btn">← Back</button>
 <button id="nextBtn" class="nav-btn">Forward →</button>
@@ -134,9 +135,6 @@ let videoMesh = null;
 let videoElement = null;
 let videoTexture = null;
 
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
-
 const overlay = document.getElementById("transitionOverlay");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
@@ -163,17 +161,22 @@ function init() {
 
   loadPanorama(0);
 
-  renderer.domElement.addEventListener("pointerdown", onPointerDown);
+  renderer.domElement.addEventListener("pointerdown", unlockVideo);
   renderer.domElement.addEventListener("pointermove", onPointerMove);
   renderer.domElement.addEventListener("pointerup", () => isDragging = false);
   renderer.domElement.addEventListener("wheel", e => zoom(e.deltaY * 0.02));
   window.addEventListener("resize", onResize);
 }
 
+function unlockVideo() {
+  if (videoElement && videoElement.paused) {
+    videoElement.play().catch(()=>{});
+  }
+  isDragging = true;
+}
+
 function loadPanorama(index) {
   new THREE.TextureLoader().load(panoramas[index].url, tex => {
-
-    tex.encoding = THREE.sRGBEncoding;
 
     if (!sphere) {
       const geo = new THREE.SphereGeometry(500, 64, 48);
@@ -202,30 +205,31 @@ function addVideoBanner() {
   videoElement.crossOrigin = "anonymous";
   videoElement.loop = true;
   videoElement.muted = true;
-  videoElement.autoplay = true;
+  videoElement.preload = "auto";
 
   videoElement.setAttribute("playsinline", "");
   videoElement.setAttribute("webkit-playsinline", "");
 
-  videoElement.load();
+  videoElement.addEventListener("loadeddata", () => {
 
-  videoTexture = new THREE.VideoTexture(videoElement);
-  videoTexture.encoding = THREE.sRGBEncoding;
-  videoTexture.needsUpdate = true;
+    videoTexture = new THREE.VideoTexture(videoElement);
+    videoTexture.needsUpdate = true;
 
-  const geometry = new THREE.PlaneGeometry(200, 335);
-  const material = new THREE.MeshBasicMaterial({
-    map: videoTexture,
-    transparent: true,
-    side: THREE.DoubleSide
+    const geometry = new THREE.PlaneGeometry(200, 335);
+    const material = new THREE.MeshBasicMaterial({
+      map: videoTexture,
+      side: THREE.DoubleSide
+    });
+
+    videoMesh = new THREE.Mesh(geometry, material);
+    videoMesh.position.set(-360, 10, 25);
+    videoMesh.rotation.y = THREE.MathUtils.degToRad(80);
+    scene.add(videoMesh);
+
+    videoElement.play().catch(()=>{});
   });
 
-  videoMesh = new THREE.Mesh(geometry, material);
-  videoMesh.position.set(-360, 10, 25);
-  videoMesh.rotation.y = THREE.MathUtils.degToRad(80);
-  scene.add(videoMesh);
-
-  videoElement.play().catch(() => {});
+  videoElement.load();
 }
 
 function removeVideoBanner() {
@@ -240,16 +244,9 @@ function removeVideoBanner() {
 
 function toggleSound() {
   if (!videoElement) return;
-
   videoElement.muted = !videoElement.muted;
-
-  if (!videoElement.muted) {
-    videoElement.play().catch(() => {});
-  }
-
-  soundBtn.textContent = videoElement.muted
-    ? "🔇 Sound Off"
-    : "🔊 Sound On";
+  if (!videoElement.muted) videoElement.play().catch(()=>{});
+  soundBtn.textContent = videoElement.muted ? "🔇 Sound Off" : "🔊 Sound On";
 }
 
 function move(forward) {
@@ -260,53 +257,12 @@ function move(forward) {
     ? panoramas[currentIndex].forward
     : panoramas[currentIndex].backward;
 
-  const start = performance.now();
-  const duration = 1200;
-
-  function animateMove() {
-    const t = Math.min((performance.now() - start) / duration, 1);
-    const ease = 1 - Math.pow(1 - t, 3);
-
-    const dir = new THREE.Vector3(0, 0, -1).applyQuaternion(camera.quaternion);
-    camera.position.copy(dir.multiplyScalar(ease * 160));
-
-    overlay.style.opacity = ease * 0.8;
-
-    if (t < 1) {
-      requestAnimationFrame(animateMove);
-    } else {
-      camera.position.set(0, 0, 0);
-      overlay.style.opacity = 0;
-      loadPanorama(target);
-      isTransitioning = false;
-    }
-  }
-
-  animateMove();
-}
-
-function onPointerDown(e) {
-  mouse.x = (e.clientX / innerWidth) * 2 - 1;
-  mouse.y = -(e.clientY / innerHeight) * 2 + 1;
-
-  raycaster.setFromCamera(mouse, camera);
-
-  if (videoMesh) {
-    const hits = raycaster.intersectObject(videoMesh);
-    if (hits.length) {
-      if (videoElement.paused) {
-        videoElement.play().catch(() => {});
-      } else {
-        videoElement.pause();
-      }
-      return;
-    }
-  }
-  isDragging = true;
+  loadPanorama(target);
+  isTransitioning = false;
 }
 
 function onPointerMove(e) {
-  if (!isDragging || isTransitioning) return;
+  if (!isDragging) return;
   yaw -= e.movementX * 0.25;
   pitch -= e.movementY * 0.25;
   pitch = Math.max(-85, Math.min(85, pitch));
@@ -328,9 +284,6 @@ function animate() {
   camera.rotation.order = "YXZ";
   camera.rotation.y = THREE.MathUtils.degToRad(yaw);
   camera.rotation.x = THREE.MathUtils.degToRad(pitch);
-
-  if (videoTexture) videoTexture.needsUpdate = true;
-
   renderer.render(scene, camera);
 }
 </script>
