@@ -1,289 +1,360 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>360° Street View with Video Banner</title>
+<meta charset="UTF-8">
+<title>Print Store</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
-html, body {
+* {
   margin: 0;
-  height: 100%;
-  overflow: hidden;
-  background: #000;
+  padding: 0;
+  box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
-canvas { display: block; }
-#transitionOverlay {
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at center, transparent 20%, #000 80%);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.8s ease;
-  z-index: 10;
+
+body {
+  background: #fff;
+  margin: 0 50px; 
 }
-.nav-btn {
-  position: fixed;
-  bottom: 24px;
-  width: 140px;
-  height: 54px;
-  background: rgba(20,40,80,0.9);
-  color: #fff;
-  border: 1px solid rgba(120,180,255,0.6);
-  border-radius: 14px;
-  font-size: 18px;
-  font-weight: bold;
-  cursor: pointer;
-  backdrop-filter: blur(10px);
-  z-index: 15;
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 15px 30px;
+  gap: 20px;
 }
-#prevBtn { left: 24px; }
-#nextBtn { right: 24px; }
-.zoom-btn {
-  position: fixed;
-  right: 24px;
-  width: 54px;
-  height: 54px;
-  background: rgba(20,40,80,0.9);
+
+.logo {
+  background: #ddd;
+  padding: 10px 20px;
+}
+
+.search-box {
+  flex: 1;
+  display: flex;
+  background: #e0e0e0;
+  padding: 10px;
+  border-radius: 20px;
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.header-links a {
+  margin-left: 15px;
+  text-decoration: none;
+  color: #000;
+}
+
+.nav {
+  display: flex;
+  gap: 10px;
+  padding: 10px 30px;
+  font-size: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #333;
+  padding: 8px 14px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+}
+
+.nav a:hover {
+  background: #000;
   color: #fff;
-  border: 1px solid rgba(120,180,255,0.6);
+  transform: translateY(-2px);
+}
+
+.slider {
+  background: #e5e5e5;
+  height: 70vh;
+  position: relative;
+}
+
+.slide {
+  display: none;
+  height: 70vh;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+}
+
+.slide.active {
+  display: flex;
+}
+
+.dots {
+  position: absolute;
+  bottom: 15px;
+  width: 100%;
+  text-align: center;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  background: #aaa;
+  display: inline-block;
   border-radius: 50%;
-  font-size: 26px;
-  font-weight: bold;
-  cursor: pointer;
-  backdrop-filter: blur(10px);
-  z-index: 15;
+  margin: 0 5px;
 }
-#zoomIn { bottom: 100px; }
-#zoomOut { bottom: 160px; }
-#soundBtn {
-  position: fixed;
-  top: 24px;
-  right: 24px;
-  padding: 12px 18px;
-  border-radius: 12px;
-  background: rgba(20,40,80,0.9);
-  color: #fff;
-  border: 1px solid rgba(120,180,255,0.6);
+
+.dot.active {
+  background: #000;
+}
+
+.section {
+  padding: 40px;
+  text-align: center;
+}
+
+.section h2 {
+  margin-bottom: 25px;
+}
+
+.grid {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 220px;       
+  height: 160px;        
+  background: #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;       
+  transition: transform 0.3s ease;
+  border-radius: 12px;   
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08); 
+}
+
+.card:hover {
+  transform: scale(1.06);  
+}
+
+.reviews {
+  text-align: center;
+  padding: 50px;
+}
+
+.stars {
+  margin: 15px 0;
+  font-size: 22px;
+}
+
+.review-text {
+  max-width: 600px;
+  margin: auto;
+}
+
+.reviewer {
+  display: block;
+  margin-top: 10px;
+  color: #007bff;
+}
+
+.ad-banner {
+  background: #e0e0e0;
+  height: 120px;
+  margin: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-around;
+  padding: 30px;
+  flex-wrap: wrap;
+}
+
+.map {
+  width: 300px;
+  height: 150px;
+  background-image: url("https://maps.googleapis.com/maps/api/staticmap?center=12.9208213,77.620164&zoom=15&size=600x300&markers=color:red%7C12.9208213,77.620164");
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 10px;
+  color: #000;
+  font-weight: bold;
+  background-color: #ddd;
   cursor: pointer;
-  z-index: 20;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #000;
+  margin-right: 5px;
+}
+
+.socials {
+  margin-top: 12px;
+  display: flex;
+  gap: 12px;
+}
+
+.socials a {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.socials img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.copy {
+  text-align: center;
+  padding: 15px;
+  font-size: 13px;
 }
 </style>
 </head>
+
 <body>
 
-<div id="transitionOverlay"></div>
-<button id="prevBtn" class="nav-btn">← Back</button>
-<button id="nextBtn" class="nav-btn">Forward →</button>
-<button id="zoomIn" class="zoom-btn">+</button>
-<button id="zoomOut" class="zoom-btn">−</button>
-<button id="soundBtn">🔇 Sound Off</button>
+<header class="header">
+  <div class="logo">Logo</div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <div class="search-box">
+    <input type="text" placeholder="Search">
+    🔍
+  </div>
+
+  <div class="header-links">
+    <a href="support.html">Help Center</a>
+    <a href="#">Sign in</a>
+  </div>
+</header>
+
+<nav class="nav">
+  <a href="calendars&diaries.html">Calendars & Diaries</a>
+  <a href="apparel.html">Apparel</a>
+  <a href="photogifts.html">Photo Gifts</a>
+  <a href="rewards&recognition.html">Rewards & Recognition</a>
+  <a href="stationary.html">Business Stationery</a>
+  <a href="marketing&promo.html">Marketing & Promo</a>
+  <a href="packaging.html">Packaging</a>
+  <a href="stamp&ink.html">Stamps & Ink</a>
+  <a href="drinkware.html">Drinkware</a>
+</nav>
+
+<section class="slider">
+  <div class="slide active">Image Sliding</div>
+  <div class="slide">Banner Image 2</div>
+  <div class="slide">Banner Image 3</div>
+
+  <div class="dots">
+    <span class="dot active"></span>
+    <span class="dot"></span>
+    <span class="dot"></span>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Popular Categories</h2>
+  <div class="grid">
+    <div class="card">Startup Branding</div>
+    <div class="card">Event & Promotions</div>
+    <div class="card">Cafe & Restaurant</div>
+    <div class="card">Photo Gifts</div>
+    <div class="card">Rewards & Recognition</div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>Best Sellers</h2>
+  <div class="grid">
+    <div class="card">Business Cards</div>
+    <div class="card">Photo Frames</div>
+    <div class="card">Apparel</div>
+    <div class="card">Stickers</div>
+    <div class="card">Cards</div>
+    <div class="card">Drinkware</div>
+  </div>
+</section>
+
+<section class="reviews">
+  <h2> What Our Customers Say</h2>
+  <div class="stars">⭐⭐⭐⭐☆</div>
+  <p class="review-text">
+    Best Quality Printing, Whole workflow impressed and design work too good,
+    more than expected output I received. Thank you.
+  </p>
+  <span class="reviewer">– Krishna K</span>
+</section>
+
+<div class="ad-banner">Ad Banner Image</div>
+
+<footer class="footer">
+  <a href="https://www.google.com/maps/place/Nahdi+Mandi+Restaurant+Bangalore/@12.9206363,77.6160441,956m/data=!3m1!1e3!4m6!3m5!1s0x3bae15547bd9ab15:0x902be23582683785!8m2!3d12.9208213!4d77.620164!16s%2Fg%2F11vcmd7pr0?entry=ttu"
+     target="_blank"
+     style="text-decoration: none; color: inherit;">
+    <div class="map">Your Store Name<br>Your Full Address<br>Bengaluru, Karnataka</div>
+  </a>
+
+  <div class="footer-links">
+    <a href="about.html">About Us |</a>
+    <a href="support.html">Support</a>
+
+    <div class="socials">
+      <a href="https://www.facebook.com/" target="_blank">
+        <img src="assets/icons8-facebook-logo-64 blk.png" alt="Facebook">
+      </a>
+
+      <a href="https://www.instagram.com/" target="_blank">
+        <img src="assets/icons8-instagram-64blk.png" alt="Instagram">
+      </a>
+
+      <a href="https://twitter.com/" target="_blank">
+        <img src="assets/icons8-twitter-logo-64 blk.png" alt="Twitter">
+      </a>
+    </div>
+  </div>
+</footer>
+
+<div class="copy">All copy rights Reserved</div>
+
 <script>
+let index = 0;
+const slides = document.querySelectorAll(".slide");
+const dots = document.querySelectorAll(".dot");
 
-const panoramas = [
-  {
-    url: "https://raw.githubusercontent.com/Gitboi46/360-viewer/main/Panorama3_Configuration1_BJP.jpg",
-    forward: 1,
-    backward: 7,
-    hasVideo: true
-  },
-  {
-    url: "https://raw.githubusercontent.com/Gitboi46/360-viewer/main/Panorama4.png",
-    forward: 2,
-    backward: 0
-  },
-  {
-    url: "https://raw.githubusercontent.com/Gitboi46/360-viewer/main/Panorama5.png",
-    forward: 3,
-    backward: 1
-  },
-  {
-    url: "https://raw.githubusercontent.com/Gitboi46/360-viewer/main/Panorama3.png",
-    forward: 4,
-    backward: 2
-  },
-  {
-    url: "https://raw.githubusercontent.com/Gitboi46/360-viewer/main/Panorama4.png",
-    forward: 5,
-    backward: 3
-  },
-  {
-    url: "https://raw.githubusercontent.com/Gitboi46/360-viewer/main/Panorama6.png",
-    forward: 6,
-    backward: 4
-  },
-  {
-    url: "https://raw.githubusercontent.com/Gitboi46/360-viewer/main/Panorama7.png",
-    forward: 7,
-    backward: 5
-  },
-  {
-    url: "https://raw.githubusercontent.com/Gitboi46/360-viewer/main/Panorama9.png",
-    forward: 0,
-    backward: 6
-  }
-];
-
-let scene, camera, renderer, sphere;
-let yaw = 0, pitch = 0;
-let currentIndex = 0;
-let isDragging = false;
-let videoMesh = null;
-let videoElement = null;
-let videoTexture = null;
-
-const overlay = document.getElementById("transitionOverlay");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-const zoomInBtn = document.getElementById("zoomIn");
-const zoomOutBtn = document.getElementById("zoomOut");
-const soundBtn = document.getElementById("soundBtn");
-
-init();
-animate();
-
-prevBtn.onclick = () => move(false);
-nextBtn.onclick = () => move(true);
-zoomInBtn.onclick = () => zoom(-5);
-zoomOutBtn.onclick = () => zoom(5);
-soundBtn.onclick = toggleSound;
-
-function init() {
-  scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 2000);
-  renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setSize(innerWidth, innerHeight);
-  renderer.setPixelRatio(devicePixelRatio);
-  document.body.appendChild(renderer.domElement);
-
-  loadPanorama(0);
-
-  renderer.domElement.addEventListener("pointerdown", userGesture);
-  renderer.domElement.addEventListener("pointermove", onPointerMove);
-  renderer.domElement.addEventListener("pointerup", () => isDragging = false);
-  renderer.domElement.addEventListener("wheel", e => zoom(e.deltaY * 0.02));
-  window.addEventListener("resize", onResize);
+function showSlide(i) {
+  slides.forEach(s => s.classList.remove("active"));
+  dots.forEach(d => d.classList.remove("active"));
+  slides[i].classList.add("active");
+  dots[i].classList.add("active");
 }
 
-function userGesture() {
-  if (videoElement && videoElement.paused) {
-    videoElement.play().catch(()=>{});
-  }
-  isDragging = true;
-}
-
-function loadPanorama(index) {
-  new THREE.TextureLoader().load(panoramas[index].url, tex => {
-
-    if (!sphere) {
-      const geo = new THREE.SphereGeometry(500, 64, 48);
-      geo.scale(-1, 1, 1);
-      sphere = new THREE.Mesh(
-        geo,
-        new THREE.MeshBasicMaterial({ map: tex })
-      );
-      scene.add(sphere);
-    } else {
-      sphere.material.map = tex;
-      sphere.material.needsUpdate = true;
-    }
-
-    removeVideoBanner();
-    if (panoramas[index].hasVideo) addVideoBanner();
-
-    currentIndex = index;
-  });
-}
-
-function addVideoBanner() {
-
-  videoElement = document.createElement("video");
-  videoElement.src = "https://raw.githubusercontent.com/Gitboi46/360-viewer/main/Sakshi%20Intro%20Blue%20Screen.mp4";
-  videoElement.crossOrigin = "anonymous";
-  videoElement.loop = true;
-  videoElement.muted = true;
-  videoElement.preload = "auto";
-  videoElement.playsInline = true;
-  videoElement.setAttribute("playsinline", "");
-  videoElement.setAttribute("webkit-playsinline", "");
-
-  videoElement.addEventListener("canplaythrough", () => {
-
-    videoTexture = new THREE.VideoTexture(videoElement);
-    videoTexture.minFilter = THREE.LinearFilter;
-    videoTexture.magFilter = THREE.LinearFilter;
-    videoTexture.format = THREE.RGBAFormat;
-
-    const geometry = new THREE.PlaneGeometry(200, 335);
-    const material = new THREE.MeshBasicMaterial({
-      map: videoTexture,
-      side: THREE.DoubleSide
-    });
-
-    videoMesh = new THREE.Mesh(geometry, material);
-    videoMesh.position.set(-360, 10, 25);
-    videoMesh.rotation.y = THREE.MathUtils.degToRad(80);
-    scene.add(videoMesh);
-
-    videoElement.play().catch(()=>{});
-  });
-
-  videoElement.load();
-}
-
-function removeVideoBanner() {
-  if (!videoMesh) return;
-  scene.remove(videoMesh);
-  if (videoElement) videoElement.pause();
-  videoMesh = null;
-  videoElement = null;
-}
-
-function toggleSound() {
-  if (!videoElement) return;
-  videoElement.muted = !videoElement.muted;
-  if (!videoElement.muted) videoElement.play().catch(()=>{});
-  soundBtn.textContent = videoElement.muted ? "🔇 Sound Off" : "🔊 Sound On";
-}
-
-function move(forward) {
-  const target = forward
-    ? panoramas[currentIndex].forward
-    : panoramas[currentIndex].backward;
-
-  loadPanorama(target);
-}
-
-function onPointerMove(e) {
-  if (!isDragging) return;
-  yaw -= e.movementX * 0.25;
-  pitch -= e.movementY * 0.25;
-  pitch = Math.max(-85, Math.min(85, pitch));
-}
-
-function zoom(amount) {
-  camera.fov = THREE.MathUtils.clamp(camera.fov + amount, 30, 90);
-  camera.updateProjectionMatrix();
-}
-
-function onResize() {
-  camera.aspect = innerWidth / innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(innerWidth, innerHeight);
-}
-
-function animate() {
-  requestAnimationFrame(animate);
-  camera.rotation.order = "YXZ";
-  camera.rotation.y = THREE.MathUtils.degToRad(yaw);
-  camera.rotation.x = THREE.MathUtils.degToRad(pitch);
-
-  if (videoTexture) videoTexture.needsUpdate = true;
-
-  renderer.render(scene, camera);
-}
+setInterval(() => {
+  index = (index + 1) % slides.length;
+  showSlide(index);
+}, 3000);
 </script>
+
 </body>
 </html>
