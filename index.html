@@ -80,11 +80,12 @@ canvas { display: block; }
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
 <script>
+
 const panoramas = [
   {
     url: "https://raw.githubusercontent.com/Gitboi46/360-viewer/main/Panorama3_Configuration1_BJP.jpg",
     forward: 1,
-    backward: 7,         
+    backward: 7,
     hasVideo: true
   },
   {
@@ -119,9 +120,9 @@ const panoramas = [
   },
   {
     url: "https://raw.githubusercontent.com/Gitboi46/360-viewer/main/Panorama9.png",
-    forward: 0,     
+    forward: 0,
     backward: 6
-  }   
+  }
 ];
 
 let scene, camera, renderer, sphere;
@@ -131,6 +132,7 @@ let isDragging = false;
 let isTransitioning = false;
 let videoMesh = null;
 let videoElement = null;
+let videoTexture = null;
 
 const raycaster = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
@@ -170,7 +172,8 @@ function init() {
 
 function loadPanorama(index) {
   new THREE.TextureLoader().load(panoramas[index].url, tex => {
-    tex.colorSpace = THREE.SRGBColorSpace;
+
+    tex.encoding = THREE.sRGBEncoding;
 
     if (!sphere) {
       const geo = new THREE.SphereGeometry(500, 64, 48);
@@ -193,61 +196,36 @@ function loadPanorama(index) {
 }
 
 function addVideoBanner() {
+
   videoElement = document.createElement("video");
   videoElement.src = "https://raw.githubusercontent.com/Gitboi46/360-viewer/main/Sakshi%20Intro%20Blue%20Screen.mp4";
   videoElement.crossOrigin = "anonymous";
   videoElement.loop = true;
   videoElement.muted = true;
   videoElement.autoplay = true;
-  videoElement.setAttribute('playsinline', '');
-  videoElement.setAttribute('webkit-playsinline', '');
 
-  videoElement.play().catch(e => console.log("play() failed:", e));
+  videoElement.setAttribute("playsinline", "");
+  videoElement.setAttribute("webkit-playsinline", "");
 
-  const texture = new THREE.VideoTexture(videoElement);
-  texture.colorSpace = THREE.SRGBColorSpace;
+  videoElement.load();
 
-  const chromaKeyMaterial = new THREE.ShaderMaterial({
-    uniforms: {
-      tVideo:     { value: texture },
-      keyColor:   { value: new THREE.Color(0x0000ff) },  
-      threshold:  { value: 0.18 },                       
-      smoothing:  { value: 0.12 }                        
-    },
-    vertexShader: `
-      varying vec2 vUv;
-      void main() {
-        vUv = uv;
-        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-      }
-    `,
-    fragmentShader: `
-      uniform sampler2D tVideo;
-      uniform vec3 keyColor;
-      uniform float threshold;
-      uniform float smoothing;
-      varying vec2 vUv;
-
-      void main() {
-        vec4 texel = texture2D(tVideo, vUv);
-        vec3 color = texel.rgb;
-
-        float dist = distance(color, keyColor);
-        float alpha = smoothstep(threshold, threshold + smoothing, dist);
-
-        gl_FragColor = vec4(color, texel.a * alpha);
-      }
-    `,
-    transparent: true,
-    side: THREE.DoubleSide,
-    depthWrite: false
-  });
+  videoTexture = new THREE.VideoTexture(videoElement);
+  videoTexture.encoding = THREE.sRGBEncoding;
+  videoTexture.needsUpdate = true;
 
   const geometry = new THREE.PlaneGeometry(200, 335);
-  videoMesh = new THREE.Mesh(geometry, chromaKeyMaterial);
-  videoMesh.position.set(-360, 10, 25)
+  const material = new THREE.MeshBasicMaterial({
+    map: videoTexture,
+    transparent: true,
+    side: THREE.DoubleSide
+  });
+
+  videoMesh = new THREE.Mesh(geometry, material);
+  videoMesh.position.set(-360, 10, 25);
   videoMesh.rotation.y = THREE.MathUtils.degToRad(80);
   scene.add(videoMesh);
+
+  videoElement.play().catch(() => {});
 }
 
 function removeVideoBanner() {
@@ -262,20 +240,16 @@ function removeVideoBanner() {
 
 function toggleSound() {
   if (!videoElement) return;
-  videoElement.muted = !videoElement.muted;
-  soundBtn.textContent = videoElement.muted ? "🔇 Sound Off" : "🔊 Sound On";
-  if (!videoElement.muted && videoElement.paused) {
-    videoElement.play().catch(() => {});
-  }
-}
 
-function togglePlayPause() {
-  if (!videoElement) return;
-  if (videoElement.paused) {
+  videoElement.muted = !videoElement.muted;
+
+  if (!videoElement.muted) {
     videoElement.play().catch(() => {});
-  } else {
-    videoElement.pause();
   }
+
+  soundBtn.textContent = videoElement.muted
+    ? "🔇 Sound Off"
+    : "🔊 Sound On";
 }
 
 function move(forward) {
@@ -320,7 +294,11 @@ function onPointerDown(e) {
   if (videoMesh) {
     const hits = raycaster.intersectObject(videoMesh);
     if (hits.length) {
-      togglePlayPause();
+      if (videoElement.paused) {
+        videoElement.play().catch(() => {});
+      } else {
+        videoElement.pause();
+      }
       return;
     }
   }
@@ -329,7 +307,7 @@ function onPointerDown(e) {
 
 function onPointerMove(e) {
   if (!isDragging || isTransitioning) return;
-  yaw   -= e.movementX * 0.25;
+  yaw -= e.movementX * 0.25;
   pitch -= e.movementY * 0.25;
   pitch = Math.max(-85, Math.min(85, pitch));
 }
@@ -350,6 +328,9 @@ function animate() {
   camera.rotation.order = "YXZ";
   camera.rotation.y = THREE.MathUtils.degToRad(yaw);
   camera.rotation.x = THREE.MathUtils.degToRad(pitch);
+
+  if (videoTexture) videoTexture.needsUpdate = true;
+
   renderer.render(scene, camera);
 }
 </script>
